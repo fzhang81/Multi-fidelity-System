@@ -108,4 +108,4 @@ The script saves `NEW_InjectionMolding_cali_y1234.RData` and `Figure7_pairwise_x
 
 ## Data availability
 
-The public files support plotting the Section 5 summaries, generating new illustrative-example results, and running the Section 6 analysis with the supplied nested datasets. The original curing data and injection molding data are not distributed with this anonymized version.
+The public files support plotting the Section 5 summaries, generating new illustrative-example results, and running the Section 6 analysis with the supplied nested datasets. The original curing data and injection molding data are not distributed with this anonymized version. Please contact corresponding author.
