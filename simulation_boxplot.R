@@ -10,7 +10,6 @@ library(gridExtra)
 # Read and process the first dataset (MSE)
 result_df <- read.csv("x1_mse.csv", header = TRUE)
 colnames(result_df) <- c("Low-fidelity", "High-fidelity", "Multi-fidelity Calibration")
-result_df[which(result_df[,2] > 0.3), 2] <- median(result_df[,2])
 
 # Convert MSE to RMSE
 result_df <- sqrt(result_df)
@@ -18,7 +17,6 @@ result_df <- sqrt(result_df)
 # Read and process the second dataset (MSE)
 result_df2 <- read.csv("x2_mse.csv", header = TRUE)
 colnames(result_df2) <- c("Low-fidelity", "High-fidelity", "Multi-fidelity Calibration")
-result_df2[which(result_df2[,2] > 0.3), 2] <- median(result_df2[,2])
 
 # Convert MSE to RMSE
 result_df2 <- sqrt(result_df2)
