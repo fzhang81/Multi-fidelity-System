@@ -127,8 +127,8 @@ predict_posterior <- function(X_new, XU, XF, yM, yF, uhat, mle, bhat, yMhat) {
 }
 
 # Update with nested data filenames
-filenameF <- "Curing_33uF_noise01_lhd50_nested"  # High fidelity (50 points, nested)
-filenameM <- "Curing_44DoCS_noise0_lhd200"      # Low fidelity (200 points)
+filenameF <- "Curing_44u_subsample50_nested"  # High fidelity (50 points, nested)
+filenameM <- "Curing_44DoC_subsample200"      # Low fidelity (200 points)
 
 ball4 <- read.csv(paste0(filenameF, ".csv"))
 ball2 <- read.csv(paste0(filenameM, ".csv"))
@@ -280,46 +280,53 @@ med_x3 <- median(x3_recov)
 med_x4 <- median(x4_recov)
 
 # Save workspace
-save_path <- paste0('Results_NestedData_Calibration.RData')
+save_path <- paste0('Results_44NestedData_Calibration.RData')
 save.image(file=save_path)
 
 ##################################################
 # Plot Results
 ##################################################
-
-par(mfrow=c(2,2), mar=c(4.5, 4.5, 1, 1)) 
+par(mfrow=c(2,2), mar=c(4.5, 4.5, 1, 1))
 
 # Top-left plot
-hist(x1_recov, freq=FALSE, main="", 
-     xlab=expression(T[1]~"("*degree*C*")"), ylab="density", xlim=c(125, 180),
-     breaks=seq(125, 180, by=2))
+hist(x1_recov, freq=FALSE, main="",
+     xlab=expression(T[1]~"("*degree*C*")"), ylab="density",
+     xlim=range(x1_recov),
+     breaks=seq(min(x1_recov)-2, max(x1_recov)+2, by=2))
 lines(density(x1_recov), col="red", lwd=1)
-abline(v=med_x1, col="red", lwd=2, lty=2) 
-text(x = med_x1 + 0.01, y = max(density(x1_recov)$y)*0.9, labels = round(med_x1, 2), col = "red", pos = 4)
+abline(v=med_x1, col="red", lwd=2, lty=2)
+text(x=med_x1+0.01, y=max(density(x1_recov)$y)*0.9,
+     labels=round(med_x1, 2), col="red", pos=4)
 
-# Top-right plot (ylab removed)
+# Top-right plot
 hist(x2_recov, freq=FALSE, main="",
-     xlab=expression(T[2]~"("*degree*C*")"), ylab="", xlim=c(150, 180),
-     breaks=seq(150, 180, by=1))
+     xlab=expression(T[2]~"("*degree*C*")"), ylab="",
+     xlim=range(x2_recov),
+     breaks=seq(min(x2_recov)-1, max(x2_recov)+1, by=1))
 lines(density(x2_recov), col="red", lwd=1)
-abline(v=med_x2, col="red", lwd=2, lty=2) 
-text(x = med_x2 + 0.01, y = max(density(x2_recov)$y) * 0.9, labels = round(med_x2, 2), col = "red", pos = 4)
+abline(v=med_x2, col="red", lwd=2, lty=2)
+text(x=med_x2+0.01, y=max(density(x2_recov)$y)*0.9,
+     labels=round(med_x2, 2), col="red", pos=4)
 
 # Bottom-left plot
 hist(x3_recov, freq=FALSE, main="",
-     xlab=expression(t[1]~"(min)"), ylab="density", xlim=c(600, 6600),
-     breaks=seq(600, 6600, by=200))
+     xlab=expression(t[1]~"(min)"), ylab="density",
+     xlim=range(x3_recov),
+     breaks=seq(min(x3_recov)-200, max(x3_recov)+200, by=200))
 lines(density(x3_recov), col="red", lwd=1)
-abline(v=med_x3, col="red", lwd=2, lty=2) 
-text(x = med_x3 + 200, y = max(density(x3_recov)$y) * 0.9, labels = round(med_x3, 2), col = "red", pos = 4)
+abline(v=med_x3, col="red", lwd=2, lty=2)
+text(x=med_x3-1300, y=max(density(x3_recov)$y)*0.9,
+     labels=round(med_x3, 2), col="red", pos=4)
 
-# Bottom-right plot (ylab removed)
+# Bottom-right plot
 hist(x4_recov, freq=FALSE, main="",
-     xlab=expression(t[2]~"(min)"), ylab="", xlim=c(7240, 12000),
-     breaks=seq(7200, 12000, by=100))
+     xlab=expression(t[2]~"(min)"), ylab="",
+     xlim=range(x4_recov),
+     breaks=seq(min(x4_recov), max(x4_recov)+100, by=100))
 lines(density(x4_recov), col="red", lwd=1)
-abline(v=med_x4, col="red", lwd=2, lty=2) 
-text(x = med_x4 - 1100, y = max(density(x4_recov)$y) * 0.9, labels = round(med_x4, 2), col = "red", pos = 4)
+abline(v=med_x4, col="red", lwd=2, lty=2)
+text(x=med_x4+100, y=max(density(x4_recov)$y)*0.9,
+     labels=round(med_x4, 2), col="red", pos=4)
 
-# Restore default par settings to avoid impacting future plots
-par(mfrow=c(1,1), mar=c(5, 4, 4, 2) + 0.1)
+par(mfrow=c(1,1), mar=c(5, 4, 4, 2)+0.1)
+
