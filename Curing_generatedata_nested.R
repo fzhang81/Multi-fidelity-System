@@ -1,3 +1,4 @@
+#setwd("~/Downloads")
 library(MASS)
 library(knitr)
 library(laGP)
