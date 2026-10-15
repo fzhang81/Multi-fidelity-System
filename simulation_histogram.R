@@ -1,5 +1,3 @@
-load("~/Downloads/cali_2025618F50M200_p5_noise02_1_u100rep100lhd500.RData")
-
 # Plot results
 par(mfrow = c(1, 2)) 
 hist(x1_recov, freq = FALSE, main = "", 
