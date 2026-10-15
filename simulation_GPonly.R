@@ -1,9 +1,9 @@
+#setwd("~/Downloads")
 library(laGP)
 library(plgp)
 library(lhs)
 library(Matrix)
 library(mvtnorm) 
-setwd("~/Downloads")
 
 # Iterate over both "M" and "F" types
 for (type in c("M", "F")) {
