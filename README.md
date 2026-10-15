@@ -92,7 +92,7 @@ To run calibration and plot the distributions of selected inputs, load the packa
 source("Curing_calibration.R")
 ```
 
-The script saves `Results_NestedData_Calibration.RData`. The original data are only needed to regenerate the subsamples; they are not required to run the analysis with the supplied CSV files.
+The script saves `Results_44NestedData_Calibration.RData`. The original data are only needed to regenerate the subsamples; they are not required to run the analysis with the supplied CSV files.
 
 ## Section 7: Injection molding
 
