@@ -77,20 +77,22 @@ The final inline plotting block in `simulation_calibration.R` may fail if select
 
 ## Section 6: Curing process simulation
 
-`Curing_generatedata_nested.R` fits polynomial models to the original simulation data and generates nested low- and high-fidelity datasets. It requires `L_Q44_complete.csv` and `L_Q33_complete.csv`, which are not included.
+`Curing_generatedata_nested.R` constructs nested datasets by subsampling the original simulation records in `L_Q44_complete.csv`, which is not included. It first selects 200 distinct input settings and then 50 settings from within this set, using repeated random subsampling with a distance-based space-filling criterion. Both responses come from the same original dataset; no polynomial models are used to generate them.
 
-The two generated datasets are supplied:
+The two subsampled datasets are supplied:
 
-- `Curing_44DoCS_noise0_lhd200.csv`: 200 low-fidelity observations.
-- `Curing_33uF_noise01_lhd50_nested.csv`: 50 high-fidelity observations whose input locations are included in the low-fidelity design.
+- `Curing_44DoC_subsample200.csv`: 200 low-fidelity observations.
+- `Curing_44u_subsample50_nested.csv`: 50 high-fidelity observations whose input locations are included in the low-fidelity design.
 
-Both have columns `T1`, `T2`, `t1`, `t2`, and `y`. To run calibration and plot the distributions of selected inputs, load the packages listed above and run:
+Both files contain columns `T1`, `T2`, `t1`, `t2`, and `y`. The high-fidelity input settings match the first 50 rows of the low-fidelity file in the same order.
+
+To run calibration and plot the distributions of selected inputs, load the packages listed above and run:
 
 ```r
 source("Curing_calibration.R")
 ```
 
-The script saves `Results_NestedData_Calibration.RData`. Regenerating the datasets is not required for this analysis.
+The script saves `Results_NestedData_Calibration.RData`. The original data are only needed to regenerate the subsamples; they are not required to run the analysis with the supplied CSV files.
 
 ## Section 7: Injection molding
 
