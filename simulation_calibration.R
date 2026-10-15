@@ -133,7 +133,7 @@ predict_posterior <- function(X_new, XU, XF, yM, yF, uhat, mle, bhat, yMhat) {
 set.seed(20256201)
 eps <- .Machine$double.eps
 
-setwd("~/Downloads")
+#setwd("~/Downloads")
 for (i in 1:50) {
   filename <- paste0("p5_noise02_", i)
   
